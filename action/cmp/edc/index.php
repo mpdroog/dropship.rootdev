@@ -44,7 +44,7 @@ if (! is_array($req)) {
   ["status"]=>
   string(7) "shipped"
 } */
-if (strtoupper($req["shipper"]) !== "TNT") {
+if (strtoupper($req["shipper"]) !== "POSTNL") {
     user_error(sprintf("Shipper unsupported. Shipper=" . $req["shipper"]));
 }
 if (strtolower($req["status"]) === "backorder") {
