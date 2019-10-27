@@ -20,11 +20,6 @@ if ($key !== "FLyyAcrd7qKmjdJMYwpBW1AJs") {
     exit;
 }
 
-/*$xml = '<?xml version="1.0" encoding="utf-8"?>
-<order> <ordernumber>EG190611222023461</ordernumber> <own_ordernumber>2373120980</own_ordernumber> <tracktrace>3STCRH1465214</tracktrace> <shipper>TNT</shipper>
-<status>shipped</status> </order>';*/
-error_log("Shipping cb=$xml");
-
 $req = xml($xml);
 if (! is_array($req)) {
     Res::error(400);
@@ -32,18 +27,6 @@ if (! is_array($req)) {
     error_log("xml($xml) fail");
     exit;
 }
-/* array(5) {
-  ["ordernumber"]=>
-  string(14) "EG110414234502"
-  ["own_ordernumber"]=>
-  string(10) "9393920209"
-  ["tracktrace"]=>
-  string(15) "3SYNTZ009101575"
-  ["shipper"]=>
-  string(3) "TNT"
-  ["status"]=>
-  string(7) "shipped"
-} */
 if (strtoupper($req["shipper"]) !== "POSTNL") {
     user_error(sprintf("Shipper unsupported. Shipper=" . $req["shipper"]));
 }
@@ -63,6 +46,6 @@ foreach ($order["orderItems"] as $item) {
             "trackAndTrace" => $req["tracktrace"]
         ]
     ]);
-    error_log(sprintf("shipment=%s", print_r($res, true)));
+    echo sprintf("EDC-order queued to Bol.com with id=%s (url=%s)\n", $res["id"], $res["links"][0]["href"]);
 }
 
