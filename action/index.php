@@ -1,8 +1,12 @@
 <?php
 namespace prj;
+require __DIR__ . "/vendor/core/Unsafe.php";
+require __DIR__ . "/vendor/core/Env.php";
+\core\Unsafe::init();
+\core\Env::init();
+
 require __DIR__ . "/vendor/core/init-browser.php";
 require __DIR__ . "/vendor/core/Taint.php";
-require __DIR__ . "/vendor/core/Env.php";
 require __DIR__ . "/vendor/core/Res.php";
 
 trait ProjectValidators {}
